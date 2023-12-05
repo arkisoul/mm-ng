@@ -1,16 +1,12 @@
 <div class="todos-list">
   <ul *ngIf="todos.length">
-    <li
+    <app-todo-item
       *ngFor="let todo of todos"
-      class="todo-item"
-      [ngClass]="getTodoItemClass(todo.isCompleted)"
-      [ngStyle]="getTodoItemStyle(todo.isCompleted)"
-    >
-      {{ todo.title }}
-    </li>
+      [todoItem]="todo"
+      (onTodoDelete)="handleTodoDelete($event)"
+    ></app-todo-item>
   </ul>
   <button (click)="popOutATodo()" *ngIf="todos.length">Pop out a Todo</button>
   <p *ngIf="!todos.length">No todos</p>
 </div>
-<app-todo-item></app-todo-item>
 <app-todo-add></app-todo-add>

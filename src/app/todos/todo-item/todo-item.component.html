@@ -1,1 +1,6 @@
-<p>todo-item works!</p>
+<div>
+  <li class="todo-item" *ngIf="todoItem">
+    {{ todoItem.title }}
+  </li>
+  <button (click)="handleDelete()">Del</button>
+</div>

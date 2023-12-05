@@ -39,4 +39,8 @@ export class TodosListComponent {
       return;
     }
   }
+
+  handleTodoDelete(id: number) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+  }
 }
