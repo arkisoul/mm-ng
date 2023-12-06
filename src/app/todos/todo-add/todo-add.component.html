@@ -1,1 +1,28 @@
-<p>todo-add works!</p>
+<div class="todo-add">
+  <form (submit)="handleTodoSubmit()" novalidate>
+    <div class="form-group">
+      <label for="title" class="sr-only">Todo title</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="What do you want to do?"
+        name="title"
+        id="title"
+        [formControl]="todoTitleFC"
+      />
+      <!-- template driven form using ngModel directive -->
+      <!-- <input
+        type="text"
+        class="form-control"
+        placeholder="What do you want to do?"
+        name="title"
+        id="title"
+        [(ngModel)]="todoTitle"
+        required
+        minlength="2"
+        maxlength="50"
+      /> -->
+      <button type="submit" [disabled]="todoTitleFC.invalid">Add</button>
+    </div>
+  </form>
+</div>
