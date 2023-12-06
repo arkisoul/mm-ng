@@ -1,6 +1,6 @@
-<div>
-  <li class="todo-item" *ngIf="todoItem">
+<li class="todo-item" *ngIf="todoItem">
+  <span>
     {{ todoItem.title }}
-  </li>
+  </span>
   <button (click)="handleDelete()">Del</button>
-</div>
+</li>

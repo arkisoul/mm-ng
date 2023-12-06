@@ -1,0 +1,9 @@
+.todos-list {
+  max-width: 30rem;
+  margin-top: 5rem;
+  margin-inline: auto;
+}
+.todos-list h2 {
+  text-align: center;
+  margin-bottom: 1em;
+}
