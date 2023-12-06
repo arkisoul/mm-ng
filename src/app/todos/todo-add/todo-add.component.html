@@ -24,5 +24,11 @@
       /> -->
       <button type="submit" [disabled]="todoTitleFC.invalid">Add</button>
     </div>
+    <small *ngIf="todoTitleFC?.dirty && todoTitleFC?.errors?.['required']"
+      >Title is required</small
+    >
+    <small *ngIf="todoTitleFC?.dirty && todoTitleFC?.errors?.['minlength']"
+      >Title should have atleast 5 chars</small
+    >
   </form>
 </div>
