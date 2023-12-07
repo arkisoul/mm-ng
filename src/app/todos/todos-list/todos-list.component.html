@@ -1,6 +1,6 @@
 <div class="todos-list">
   <h2>Todos</h2>
-  <app-todo-add></app-todo-add>
+  <app-todo-add (onAddTodo)="handleAddTodo()"></app-todo-add>
   <ul *ngIf="todos.length">
     <app-todo-item
       *ngFor="let todo of todos"

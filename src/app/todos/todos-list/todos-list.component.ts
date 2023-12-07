@@ -1,25 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TodosService } from '../todos.service';
+import { Todo } from '../models/Todo';
 
 @Component({
   selector: 'app-todos-list',
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.css',
 })
-export class TodosListComponent {
-  todos = [
-    {
-      id: 1,
-      title: 'Learn Typescript',
-      isCompleted: true,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      title: 'Learn Angular',
-      isCompleted: false,
-      createdAt: new Date().toISOString(),
-    },
-  ];
+export class TodosListComponent implements OnInit, OnDestroy {
+  todos: Todo[] = [];
+
+  constructor(private todosService: TodosService) {}
+
+  ngOnInit(): void {
+    this.todos = this.todosService.fetchAllTodos();
+  }
+
+  ngOnDestroy(): void {}
 
   getTodoItemClass(isCompleted: boolean) {
     return {
@@ -33,14 +30,11 @@ export class TodosListComponent {
     };
   }
 
-  popOutATodo() {
-    if (this.todos.length) {
-      this.todos.pop();
-      return;
-    }
+  handleTodoDelete(id: number) {
+    this.todos = this.todosService.deleteATodo(id);
   }
 
-  handleTodoDelete(id: number) {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
+  handleAddTodo() {
+    this.todos = this.todosService.fetchAllTodos();
   }
 }

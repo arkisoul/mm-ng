@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import {
   FormControl,
   Validators,
   FormGroup,
   UntypedFormBuilder,
-  FormArray,
 } from '@angular/forms';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todo-add',
@@ -13,6 +13,7 @@ import {
   styleUrl: './todo-add.component.css',
 })
 export class TodoAddComponent {
+  @Output('onAddTodo') onAddTodo: EventEmitter<void>;
   todoTitle: string = 'Learn JavaScript';
   todoTitleFC: FormControl = new FormControl('', [
     Validators.required,
@@ -26,7 +27,11 @@ export class TodoAddComponent {
   });
   userFormGroup: FormGroup;
 
-  constructor(private readonly fb: UntypedFormBuilder) {
+  constructor(
+    private readonly fb: UntypedFormBuilder,
+    private todosService: TodosService
+  ) {
+    this.onAddTodo = new EventEmitter();
     console.log('cons', this.user);
     this.todoTitleFC.valueChanges.subscribe((value) => {
       if (value.length >= 3) {
@@ -46,8 +51,15 @@ export class TodoAddComponent {
   }
 
   handleTodoSubmit() {
-    console.log(this.todoTitle, 'value submitted');
-    console.log(this.todoTitleFC);
-    this.todoTitle = '';
+    if (this.todoTitleFC.invalid) return false;
+    this.todosService.createATodo({
+      id: this.todosService.fetchAllTodos().length + 1,
+      title: this.todoTitleFC.value.trim(),
+      isCompleted: false,
+      createdAt: new Date().toISOString(),
+    });
+    this.onAddTodo.emit();
+    this.todoTitleFC.reset();
+    return true;
   }
 }
