@@ -37,4 +37,9 @@ export class TodosListComponent implements OnInit, OnDestroy {
   handleAddTodo() {
     this.todos = this.todosService.fetchAllTodos();
   }
+
+  handleTodoStatusChange(todo: Todo) {
+    this.todosService.updateATodo(todo.id, todo);
+    this.todos = this.todosService.fetchAllTodos();
+  }
 }

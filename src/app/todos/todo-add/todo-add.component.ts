@@ -34,7 +34,7 @@ export class TodoAddComponent {
     this.onAddTodo = new EventEmitter();
     console.log('cons', this.user);
     this.todoTitleFC.valueChanges.subscribe((value) => {
-      if (value.length >= 3) {
+      if (value && value.trim().length >= 3) {
         console.log('valueChanges', this.todoTitleFC);
       }
     });

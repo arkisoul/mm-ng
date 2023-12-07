@@ -5,6 +5,7 @@
     <app-todo-item
       *ngFor="let todo of todos"
       [todoItem]="todo"
+      (onTodoStatusChange)="handleTodoStatusChange($event)"
       (onTodoDelete)="handleTodoDelete($event)"
     ></app-todo-item>
   </ul>

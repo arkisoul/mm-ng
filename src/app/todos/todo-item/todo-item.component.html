@@ -1,4 +1,13 @@
 <li class="todo-item" *ngIf="todoItem">
+  <form novalidate>
+    <input
+      type="checkbox"
+      name="status"
+      id="status"
+      (change)="handleStatusChange($event)"
+      [checked]="todoItem.isCompleted"
+    />
+  </form>
   <span>
     {{ todoItem.title }}
   </span>
