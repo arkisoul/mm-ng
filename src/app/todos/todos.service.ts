@@ -7,33 +7,26 @@ import { Todo } from './models/Todo';
 })
 export class TodosService {
   private readonly baseApiEndpoint: string = `http://localhost:3000/todos`;
-  todos: Todo[];
 
-  constructor(private http: HttpClient) {
-    this.todos = [];
-  }
+  constructor(private http: HttpClient) {}
 
   fetchAllTodos() {
     return this.http.get<Todo[]>(this.baseApiEndpoint);
   }
 
   deleteATodo(id: number) {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-    return this.todos;
+    return this.http.delete(`${this.baseApiEndpoint}/${id}`);
   }
 
-  createATodo(todo: Todo) {
-    this.todos.push(todo);
+  createATodo(todo: Partial<Todo>) {
+    return this.http.post(`${this.baseApiEndpoint}`, todo);
   }
 
   fetchATodoById(id: number) {
-    return this.todos.find((todo) => todo.id === id);
+    return this.http.get<Todo[]>(`${this.baseApiEndpoint}/${id}`);
   }
 
   updateATodo(id: number, updatedTodo: Todo) {
-    this.todos = this.todos.map((todo) => {
-      if (todo.id === id) return updatedTodo;
-      return todo;
-    });
+    return this.http.put(`${this.baseApiEndpoint}/${id}`, updatedTodo);
   }
 }

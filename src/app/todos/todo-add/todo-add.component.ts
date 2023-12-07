@@ -52,14 +52,16 @@ export class TodoAddComponent {
 
   handleTodoSubmit() {
     if (this.todoTitleFC.invalid) return false;
-    this.todosService.createATodo({
-      id: 1,
-      title: this.todoTitleFC.value.trim(),
-      isCompleted: false,
-      createdAt: new Date().toISOString(),
-    });
-    this.onAddTodo.emit();
-    this.todoTitleFC.reset();
+    this.todosService
+      .createATodo({
+        title: this.todoTitleFC.value.trim(),
+        isCompleted: false,
+        createdAt: new Date().toISOString(),
+      })
+      .subscribe(() => {
+        this.onAddTodo.emit();
+        this.todoTitleFC.reset();
+      });
     return true;
   }
 }

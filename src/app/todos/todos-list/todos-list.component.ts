@@ -35,7 +35,9 @@ export class TodosListComponent implements OnInit, OnDestroy {
   }
 
   handleTodoDelete(id: number) {
-    this.todos = this.todosService.deleteATodo(id);
+    this.todosService.deleteATodo(id).subscribe(() => {
+      this.fetchAllTodos();
+    });
   }
 
   handleAddTodo() {
@@ -43,7 +45,8 @@ export class TodosListComponent implements OnInit, OnDestroy {
   }
 
   handleTodoStatusChange(todo: Todo) {
-    this.todosService.updateATodo(todo.id, todo);
-    this.fetchAllTodos();
+    this.todosService.updateATodo(todo.id, todo).subscribe(() => {
+      this.fetchAllTodos();
+    });
   }
 }
