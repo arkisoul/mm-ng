@@ -13,10 +13,14 @@ export class TodosListComponent implements OnInit, OnDestroy {
   constructor(private todosService: TodosService) {}
 
   ngOnInit(): void {
-    this.todos = this.todosService.fetchAllTodos();
+    this.fetchAllTodos();
   }
 
   ngOnDestroy(): void {}
+
+  fetchAllTodos() {
+    this.todosService.fetchAllTodos().subscribe((data) => (this.todos = data));
+  }
 
   getTodoItemClass(isCompleted: boolean) {
     return {
@@ -35,11 +39,11 @@ export class TodosListComponent implements OnInit, OnDestroy {
   }
 
   handleAddTodo() {
-    this.todos = this.todosService.fetchAllTodos();
+    this.fetchAllTodos();
   }
 
   handleTodoStatusChange(todo: Todo) {
     this.todosService.updateATodo(todo.id, todo);
-    this.todos = this.todosService.fetchAllTodos();
+    this.fetchAllTodos();
   }
 }

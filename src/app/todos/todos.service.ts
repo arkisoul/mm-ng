@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Todo } from './models/Todo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
+  private readonly baseApiEndpoint: string = `http://localhost:3000/todos`;
   todos: Todo[];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.todos = [];
   }
 
   fetchAllTodos() {
-    return this.todos;
+    return this.http.get<Todo[]>(this.baseApiEndpoint);
   }
 
   deleteATodo(id: number) {

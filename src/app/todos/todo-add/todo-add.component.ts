@@ -53,7 +53,7 @@ export class TodoAddComponent {
   handleTodoSubmit() {
     if (this.todoTitleFC.invalid) return false;
     this.todosService.createATodo({
-      id: this.todosService.fetchAllTodos().length + 1,
+      id: 1,
       title: this.todoTitleFC.value.trim(),
       isCompleted: false,
       createdAt: new Date().toISOString(),
