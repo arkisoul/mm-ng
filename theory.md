@@ -20,3 +20,9 @@ Pipe takes one or more arguments/inputs and transform them into different format
 
 - template-driven forms
 - reactive forms
+
+## Unit Test
+
+- Karma as a test runner
+- Jasmine as a testing framework
+- Angular Testing Bed
