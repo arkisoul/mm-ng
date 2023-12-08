@@ -23,7 +23,7 @@ export class TodosService {
   }
 
   fetchATodoById(id: number) {
-    return this.http.get<Todo[]>(`${this.baseApiEndpoint}/${id}`);
+    return this.http.get<Todo>(`${this.baseApiEndpoint}/${id}`);
   }
 
   updateATodo(id: number, updatedTodo: Todo) {
