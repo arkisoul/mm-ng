@@ -11,5 +11,6 @@
   <span>
     {{ todoItem.title }}
   </span>
+  <a [routerLink]="['/todos', todoItem.id]">Details</a>
   <button (click)="handleDelete()">Del</button>
 </li>
